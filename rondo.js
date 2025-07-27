@@ -241,7 +241,23 @@ function modalBuild(rowData) {
   $('.modal-image').empty();
   //rewrite the values - add any custom fields here, and in the HTML
   if (rowData.c[8]) {
-    $('figure.modal-image').html('<img src="'+rowData.c[8].v+'" alt="'+thisTitle+'"/>');
+    var extension = rowData.c[8].v.split('.').pop();
+    console.log(extension);
+    if (rowData.c[8].v.includes("https://www.youtube.com/watch?v=")){
+      console.log('youtube')
+      var youTubeID = rowData.c[8].v.split('=').pop();
+      console.log(youTubeID);
+      $('figure.modal-image').html('<iframe id="youtube-player" src="https://www.youtube.com/embed/"'+youTubeID+'>');
+    }
+    else if (extension == "png" | "jpg" | "jpeg") {
+      $('figure.modal-image').html('<img src="'+rowData.c[8].v+'" alt="'+thisTitle+'"/>');
+    }
+    else if (extension == "pdf") {
+      $('figure.modal-image').html('<a target="_blank" role="button" href="'+rowData.c[8].v+'">View PDF</a>');
+    }
+    else {
+      $('figure.modal-image').html('<a target="_blank" role="button" href="'+rowData.c[8].v+'">Download File</a>');
+    }
   }
   else if (rowData.c[5]) {
       $('figure.modal-image').html('<img src="'+rowData.c[5].v+'" alt="'+thisTitle+'"/>');
