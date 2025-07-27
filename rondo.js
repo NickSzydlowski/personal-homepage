@@ -166,8 +166,9 @@ $(document).ready(function() {
 //functions called in the script
 
 //function to display the current page - called when page is changed via the menu
-function pageChange() {
+function pageChange(event) {
   //get info needed for the script from the clicked html element
+  console.log(event);
   var query =  $(event.target).attr('pagequery');
   var slug = $(event.target).attr('pageslug');
   var articleTitle = $(event.target).attr('pagetitle');
@@ -196,7 +197,7 @@ function pageChange() {
   window.history.pushState(null, null, '?page='+slug);
 }
 //function to change page by index number - called when using next and previous buttons on articles. largely the same as the function above, but we need to get the information differently
-function pageChangeIndex() {
+function pageChangeIndex(event) {
   //get the target from the clicked button, but then get the other information from the targetted page
   var target = $(event.target).attr('targetpage');
   var myArticle = $("article[pageindex='" + target + "']");
@@ -420,7 +421,7 @@ function pages(pagesJsonData) {
       .attr('pagenavtype', 'menu')
       .attr('href', '#')
       .appendTo(li)
-      .on( "click", function() {pageChange()});
+      .on( "click", function() {pageChange(event)});
 
     console.log(parent);
     if (!subPage) {
@@ -468,7 +469,7 @@ function pages(pagesJsonData) {
         .attr('pagenavtype', 'child')
         .attr('href', '#')
         .on('click', function(){
-          pageChange()
+          pageChange(event)
         })
         .appendTo(header);
     };
@@ -553,9 +554,17 @@ function itemsDataTable(itemsJsonData) {
     //create datatable from sheet data
     itemsTable = $('#items').DataTable({
       data: itemsJsonData.rows,
-      dom: 'fQtipr',
-      searchBuilder :
-        initialSearch,
+      //dom: 'fQtipr',
+     
+      //searchBuilder :
+        //initialSearch,
+      layout: {
+        topStart: {
+            searchBuilder: initialSearch
+                
+            }
+        },
+      
       columns: [
         //The data for each row is stored in nested objects by column number
         { data: 'c.0.v', title: itemsJsonData.cols[0].label, name:'title', class: itemsJsonData.cols[0].label, defaultContent: '[Untitled]'},
@@ -655,7 +664,7 @@ function itemsDataTable(itemsJsonData) {
           }
       });
     };
-
+      
       $('.dtsb-searchBuilder').wrap('<details class="advanced"</details>');
       $('.advanced').append('<summary role="button">Filter / Advanced Search</summary>');
 
