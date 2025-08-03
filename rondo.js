@@ -51,11 +51,13 @@ $(document).ready(function() {
 
   $('dialog a.close').on('click', function(){
     $('.item-modal, .rondo-tools').removeAttr('open');
+    $('figure.modal-image').empty();
   });
   // Close with Esc key
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       $('.item-modal, .rondo-tools').removeAttr('open');
+      $('figure.modal-image').empty();
     }
   });
 
@@ -247,7 +249,7 @@ function modalBuild(rowData) {
       console.log('youtube')
       var youTubeID = rowData.c[8].v.split('=').pop();
       console.log(youTubeID);
-      $('figure.modal-image').html('<iframe id="youtube-player" src="https://www.youtube.com/embed/"'+youTubeID+'>');
+      $('figure.modal-image').html('<iframe id="youtube-player" src="https://www.youtube.com/embed/'+youTubeID+'">');
     }
     else if (extension == "png" | "jpg" | "jpeg") {
       $('figure.modal-image').html('<img src="'+rowData.c[8].v+'" alt="'+thisTitle+'"/>');
