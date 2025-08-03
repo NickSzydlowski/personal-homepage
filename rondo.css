@@ -2,7 +2,7 @@
 [data-theme=light],
 :root:not([data-theme=dark]),
 :host(:not([data-theme=dark])) {
-  --primary:#B700C0;
+  --primary:#CF2B5B;
   --font-family: nimbus-sans, sans-serif;
   --font-weight:300;
 }
@@ -227,4 +227,20 @@ table.dataTable {
 .headshot {
   border-radius:var(--border-radius);
 }
+body>footer{
+  padding: 20px 0;
+}
 
+footer h3 {
+  margin-bottom:0;
+}
+.footer-image {
+  padding: 0;
+  height: 100px;
+  overflow:hidden;
+  margin-bottom:0;
+}
+.footer-image img {
+    position: relative;
+    bottom: 350px;
+}
