@@ -177,8 +177,7 @@ table.dataTable {
 #items tr {
   flex-basis:48%;
   flex-wrap: wrap;
-  min-width:300px;
-  flex-grow: 3;
+  min-width:400px;
   margin:1%;
   background-color: var(--card-sectionning-background-color);
   border: 1px solid var(--muted-border-color);
@@ -187,6 +186,21 @@ table.dataTable {
   display: flex;
   flex-direction: row-reverse;
 }
+@media (max-width: 991px) {
+  #items tr {
+  flex-grow: 3;
+  }
+  #items td img {
+    max-height:100px;
+  }
+  #items td.Thumbnail {
+    width: 24%;
+  }
+  #items td.Title {
+    width:74%;
+  }
+}
+
 
 #items td {
   display: block;
@@ -194,7 +208,7 @@ table.dataTable {
   width: 49%;
   font-family: nimbus-sans-condensed, sans-serif;
   font-weight: 700;
-  line-height: 1.25rem;
+  /*line-height: 1.25rem;*/
 }
 
 #items td.thumbnail {
